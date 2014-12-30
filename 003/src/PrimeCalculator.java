@@ -2,21 +2,19 @@ import java.util.Arrays;
 
 public class PrimeCalculator {
 
-    /*
-     * NOT GOOD - DO NOT USE. SEE PROBLEM 3 INSTEAD.
-     */
-
     private final CircleGenerator generator = new CircleGenerator();
 
-    private int[] primeSet = new int[] {2,3,5,7,11,13,17,19};
+    private long[] primeSet = new long[] {2,3,5,7};
 
-    private int maxNumberCalulated = primeSet[primeSet.length - 1];
+    private long maxNumberCalulated = primeSet[primeSet.length - 1];
 
-    public int nthNumberCalculated = primeSet.length - 1;
+    private int nthNumberCalculated = primeSet.length - 1;
 
-    public int[] calculatePrimesUpToNumber(final int n){
+    private int nextErator = 0;
+
+    public long[] calculatePrimesUpToNumber(final long n){
         while(n>maxNumberCalulated) {
-            final int i = nextCircle();
+            final long i = nextCircle();
 
             if(eratosthenes(i)) {
                 insert(i);
@@ -28,7 +26,31 @@ public class PrimeCalculator {
         return Arrays.copyOf(primeSet, nthNumberCalculated + 1);
     }
 
-    private boolean eratosthenes(final int i) {
+    public long reset() {
+        nextErator = 0;
+
+        return primeSet[0];
+    }
+
+    public long next() {
+        nextErator++;
+
+        if(nextErator <= nthNumberCalculated) return primeSet[nextErator];
+
+        long i = 0;
+
+        do {
+            i = nextCircle();
+
+            maxNumberCalulated = i;
+        } while(!eratosthenes(i));
+
+        insert(i);
+
+        return i;
+    }
+
+    private boolean eratosthenes(final long i) {
         final double sqrt = Math.sqrt(i);
 
         if(sqrt % 1 == 0) return false;
@@ -42,17 +64,20 @@ public class PrimeCalculator {
         return true;
     }
 
-    private int nextCircle() {
+    private long nextCircle() {
         generator.updateCircle();
 
-        int i = maxNumberCalulated + 1;
+        long i = maxNumberCalulated + 1;
         circleLoop: for( ; ; i++) {
-            final int mod = i % generator.getCircle();
+            final long mod = i % generator.getCircle();
 
             if(mod == 1) break;
-            for(int j = generator.getNumOfPrimesInCircle() -1; j < primeSet.length; j++){
-                if(mod == primeSet[j]){
+            for(int j = generator.getNumOfPrimesInCircle() - 1; j < primeSet.length; j++){
+                if(mod % primeSet[j] == 0){
                     break circleLoop;
+                }
+                if(primeSet[j] > mod) {
+                    break;
                 }
             }
         }
@@ -60,10 +85,10 @@ public class PrimeCalculator {
         return i;
     }
 
-    private boolean insert(final int i) {
+    private boolean insert(final long i) {
         if(++nthNumberCalculated >= primeSet.length) {
-            final int[] tmp = primeSet;
-            primeSet = new int[primeSet.length << 1];
+            final long[] tmp = primeSet;
+            primeSet = new long[primeSet.length << 1];
 
             System.arraycopy(tmp, 0, primeSet, 0, tmp.length);
         }
@@ -80,7 +105,7 @@ public class PrimeCalculator {
         private int numOfPrimesInCircle = 0;
 
         public void updateCircle() {
-            final int largestPrime = primeSet[nthNumberCalculated];
+            final long largestPrime = primeSet[nthNumberCalculated];
 
             for( ; newCircle < largestPrime; numOfPrimesInCircle++) {
                 circle = newCircle;

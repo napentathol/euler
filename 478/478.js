@@ -73,3 +73,27 @@ var estFunc = function estFunc(n) {
 };
 
 main();
+
+function powerset(ary) {
+    var ps = [[]];
+    for (var i=0; i < ary.length; i++) {
+        for (var j = 0, len = ps.length; j < len; j++) {
+            ps.push(ps[j].concat(ary[i]));
+        }
+    }
+    return ps;
+}
+
+function createNSizedArray(n) {
+    var outArray = [];
+
+    for(var i = 0; i < n; i++) {
+        outArray.push(i);
+    }
+
+    return outArray;
+}
+ 
+var res = powerset(createNSizedArray(49));
+
+console.log(JSON.stringify(res.length));

@@ -3,9 +3,9 @@ import java.util.TreeSet;
 import java.util.Set;
 
 public class Triple {
-	private final int x;
-	private final int y;
-	private final int z;
+	protected final int x;
+	protected final int y;
+	protected final int z;
 
 	public Triple(final int x, final int y, final int z) {
 		this.x = x;

@@ -3,6 +3,8 @@ import java.util.*;
 public class TripleSet {
 	private final Set<Triple> tripleSet;
 
+    private Set<TripleSet> powerSet = null;
+
 	public TripleSet(final int n){
 		tripleSet = createComparingSet();
 
@@ -19,6 +21,18 @@ public class TripleSet {
 	private TripleSet(final Set<Triple> tripleSet) {
 		this.tripleSet = tripleSet;
 	}
+
+    public int getEValue() {
+        final Set<TripleSet> set = powerSet();
+
+        int count = 0;
+
+        for (final TripleSet triples : set) {
+            if(triples.isUnary()) count++;
+        }
+
+        return count;
+    }
 
 	public int compareTo(final TripleSet set) {
 		if(tripleSet.size() != set.tripleSet.size()) return tripleSet.size() - set.tripleSet.size();
@@ -37,12 +51,24 @@ public class TripleSet {
 		return 0;
 	}
 
+    public boolean isUnary() {
+        final AddTriple add = new AddTriple();
+
+        for(final Triple triple : tripleSet) {
+            add.add(triple);
+        }
+
+        return add.unary();
+    }
+
 	public Set<TripleSet> powerSet() {
+        if(this.powerSet != null) return this.powerSet;
+
 		final Set<TripleSet> powerSet = new TreeSet<TripleSet>(new Comparator<TripleSet>() {
 			@Override
 			public int compare(final TripleSet o1, final TripleSet o2) {
 				return o1.compareTo(o2);
-			}
+		}
 		});
 
 		powerSet.add(new TripleSet(copyTripleCollection(tripleSet)));
@@ -53,6 +79,8 @@ public class TripleSet {
 			powerSetRecursive(tmp, powerSet);
 
 		}
+
+        this.powerSet = powerSet;
 
 		return powerSet;
 	}

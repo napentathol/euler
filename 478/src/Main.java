@@ -9,7 +9,9 @@ public class Main {
 					"\tF(n): " + calculator.f(n) +
 					" \tG(n): " + calculator.g(n) +
 					" \tSize: " + tripleSet.size() +
-					" \tPower: " + tripleSet.powerSet().size()
+					" \tPower: " + tripleSet.powerSet().size() +
+                    " \tUnaries: " + tripleSet.getEValue() +
+                    " \tRejected: " + (tripleSet.powerSet().size() - tripleSet.getEValue())
 			);
 		}
 	}
