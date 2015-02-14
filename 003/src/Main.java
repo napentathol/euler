@@ -1,6 +1,8 @@
+import us.sodiumlabs.math.prime.PrimeDecomposer;
+
 public class Main {
     public static void main(final String[] args) {
-        final Decomposer decomposer = new Decomposer();
+        final PrimeDecomposer decomposer = new PrimeDecomposer();
 
         System.out.println("result: " + decomposer.greatestPrimeFactorial(210L));
         System.out.println("result: " + decomposer.greatestPrimeFactorial(2310L));

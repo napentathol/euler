@@ -1,6 +1,9 @@
-import java.util.Arrays;
+package us.sodiumlabs.math.prime;
 
-public class PrimeCalculator {
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class PrimeCalculator implements Iterable<Long> {
 
     private final CircleGenerator generator = new CircleGenerator();
 
@@ -26,13 +29,7 @@ public class PrimeCalculator {
         return Arrays.copyOf(primeSet, nthNumberCalculated + 1);
     }
 
-    public long reset() {
-        nextErator = 0;
-
-        return primeSet[0];
-    }
-
-    public long next() {
+    private long next() {
         nextErator++;
 
         if(nextErator <= nthNumberCalculated) return primeSet[nextErator];
@@ -96,6 +93,24 @@ public class PrimeCalculator {
         primeSet[nthNumberCalculated] = i;
 
         return true;
+    }
+
+    public Long getNthPrime(final int n) {
+        while(n > nthNumberCalculated) {
+            next();
+        }
+
+        return primeSet[n];
+    }
+
+    /**
+     * Returns an iterator over elements of type {@code T}.
+     *
+     * @return an Iterator.
+     */
+    @Override
+    public Iterator<Long> iterator() {
+        return new PrimeIterator(this);
     }
 
 

@@ -1,3 +1,5 @@
+import us.sodiumlabs.math.prime.PrimeCalculator;
+
 import java.util.*;
 
 public class Calculator {
@@ -102,13 +104,13 @@ public class Calculator {
 
         int number = n;
 
-        for(final int i : primeCalculator.calculatePrimesUpToNumber(n/2)) {
+        for(final long i : primeCalculator.calculatePrimesUpToNumber(n/2)) {
             if(i == 1) break;
 
             while(number % i == 0) {
-                number = number / i;
+                number = number / (int)i;
 
-                decompList.add(i);
+                decompList.add((int)i);
             }
         }
 
