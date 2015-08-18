@@ -2,37 +2,24 @@ package us.sodiumlabs.math;
 
 import us.sodiumlabs.math.prime.PrimeDecomposer;
 
+import java.math.BigInteger;
 import java.util.Set;
 
 public class IntegerRelationships {
 
-    private final PrimeDecomposer decomposer;
-
-    public IntegerRelationships(final PrimeDecomposer decomposer){
-        this.decomposer = decomposer;
+    public static BigInteger gcd(final BigInteger ... numbers){
+        BigInteger result = numbers[0];
+        for(int i = 1; i < numbers.length; i++) result = result.gcd(numbers[i]);
+        return result;
     }
 
-    public long GCD(final long ... numbers){
-        Set<Long> longs = null;
-
-        for (final long n :numbers) {
-            if(null == longs) {
-                longs = decomposer.decompose(n);
-            } else {
-                longs = SetManipulator.intersection(longs, decomposer.decompose(n));
-            }
-        }
-
-        return recompose();
+    public static BigInteger lcm(final BigInteger ... numbers){
+        BigInteger result = numbers[0];
+        for(int i = 1; i < numbers.length; i++) result = lcm(result, numbers[i]);
+        return result;
     }
 
-    public long recompose(final Set<Long> set) {
-        long out = 1;
-
-        for(final long l : set) {
-            out *= l;
-        }
-
-        return out;
+    public static BigInteger lcm(final BigInteger a, final BigInteger b) {
+        return a.multiply(b.divide(a.gcd(b)));
     }
 }

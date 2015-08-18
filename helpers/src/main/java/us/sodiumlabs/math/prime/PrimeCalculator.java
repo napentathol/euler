@@ -15,6 +15,23 @@ public class PrimeCalculator implements Iterable<Long> {
 
     private int nextErator = 0;
 
+    public boolean isPrime(final long n) {
+        calculatePrimesUpToNumber(n);
+
+        return binarySearch(n, 0, nthNumberCalculated + 1);
+    }
+
+    private boolean binarySearch(long n, int i, int j) {
+        final int s = ((j - i) / 2) + i;
+
+        if(n == primeSet[s]) return true;
+        if(s == i) return false;
+        if(n < primeSet[s]) return binarySearch(n, i, s);
+        if(n > primeSet[s]) return binarySearch(n,s,j);
+
+        throw new RuntimeException("Not supposed to get here!");
+    }
+
     public long[] calculatePrimesUpToNumber(final long n){
         while(n>maxNumberCalulated) {
             final long i = nextCircle();
@@ -95,7 +112,7 @@ public class PrimeCalculator implements Iterable<Long> {
         return true;
     }
 
-    public Long getNthPrime(final int n) {
+    public long getNthPrime(final int n) {
         while(n > nthNumberCalculated) {
             next();
         }

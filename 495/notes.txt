@@ -1,0 +1,27 @@
+Count factorial prime factor exponent
+
+cfpfe(p, n) {
+	s = floor( n / p );
+
+	if( s == 0 ) return 0;
+
+	return s + cfpfe(p, s);
+}
+
+Count unique factorial factors
+
+cuff(n) {
+	primes[] = getPrimestoN(n);
+
+	count = 0;
+
+	for(p of primes) {
+		count = q( count, cfpfe(p, n) );
+	}
+
+	return count + 1;
+}
+
+q(n, i) {
+	return n * (i + 1) + i
+}
