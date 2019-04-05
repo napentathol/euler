@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Main {
+public class P029 {
 
 private List<BigInteger> resList = new ArrayList<BigInteger>();
 
@@ -29,11 +29,11 @@ public void aTerate(final int k) {
 }
 
 public static void main(final String[] args) {
-	final Main five = new Main();
+	final P029 five = new P029();
 
 	five.aTerate(5);
 
-	final Main hundo = new Main();
+	final P029 hundo = new P029();
 
 	hundo.aTerate(100);
 }}

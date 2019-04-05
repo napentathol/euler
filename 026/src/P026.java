@@ -2,13 +2,13 @@ import us.sodiumlabs.math.prime.PrimeCalculator;
 
 import java.math.BigInteger;
 
-public class Main {
+public class P026 {
     private PrimeCalculator primeCalculator = new PrimeCalculator();
 
     private int maxSize = 0;
 
     public static void main(final String[] args) {
-        final Main main = new Main();
+        final P026 main = new P026();
 
         for(int i = 1; i < 1000; i++) {
             main.compareCycleSize(i);

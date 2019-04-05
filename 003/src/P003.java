@@ -1,6 +1,6 @@
 import us.sodiumlabs.math.prime.PrimeDecomposer;
 
-public class Main {
+public class P003 {
     public static void main(final String[] args) {
         final PrimeDecomposer decomposer = new PrimeDecomposer();
 

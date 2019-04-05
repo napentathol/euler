@@ -1,6 +1,6 @@
 import us.sodiumlabs.math.prime.PrimeCalculator;
 
-public class Main {
+public class P007 {
     public static void main(final String[] args) {
         final PrimeCalculator primeCalculator = new PrimeCalculator();
 

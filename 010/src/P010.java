@@ -2,7 +2,7 @@ import us.sodiumlabs.math.prime.PrimeCalculator;
 
 import java.util.stream.LongStream;
 
-public class Main {
+public class P010 {
     public static void main(final String[] args) {
         System.out.println("Create prime calculator!");
 

@@ -1,4 +1,4 @@
-public class Main {
+public class P478 {
 	public static void main(final String[] args){
 		final Calculator calculator = new Calculator(36);
 
