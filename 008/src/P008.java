@@ -1,4 +1,4 @@
-public class Main {
+public class P008 {
 
 private static final String NUMBER =
 "73167176531330624919225119674426574742355349194934" +
